@@ -19,14 +19,14 @@ export default class Note extends Component {
         const {isCompleted} = this.state;
         return (
             <KeyboardAvoidingView key={this.props.keyval} style={styles.note} behavior="padding" enabled>
-                <TouchableOpacity onPress={this.toggleItem}></TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={[styles.circle, isCompleted ? styles.completeCircle : styles.incompleteCircle]} />
-                    <Text style={[styles.noteTextDate]}>{this.props.val.date}</Text>
-                    <Text style={[styles.noteText]}>{this.props.val.note}</Text>
+                <TouchableOpacity onPress={this.toggleItem}>
+                    <View style={[styles.circle, isCompleted ? styles.completeCircle : styles.incompleteCircle]}/>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
+                <Text style={[styles.noteTextDate, isCompleted ? styles.strikeText : styles.unstrikeText]}>{this.props.val.date}</Text>
+                <Text style={[styles.noteText, isCompleted ? styles.strikeText : styles.unstrikeText]}>{this.props.val.note}</Text>
+
+                <TouchableOpacity onPress={this.props.deleteMethod} style={[isCompleted ? styles.incomplete : styles.noteDelete]}>
                     <Text style={styles.noteDeleteText}>-</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
@@ -46,9 +46,6 @@ const styles = StyleSheet.create({
         paddingLeft: 30,
         paddingBottom: 20,
         paddingRight:30,
-        // alignItems: 'center',
-        // borderLeftWidth: 10,
-        // borderLeftColor: '#E91E63'
     },
     noteTextDate: {
         paddingLeft: 30,
@@ -62,10 +59,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     completeCircle: {
-        borderColor: '#bbb'
+        borderColor: '#bbb',
+        backgroundColor: '#bbb'
     },
     incompleteCircle: {
         borderColor: '#DA4453'
+    },
+    incomplete: {
     },
     strikeText: {
         color: '#bbb',

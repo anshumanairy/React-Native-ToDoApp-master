@@ -43,6 +43,7 @@ export default class Main extends Component {
                 <TouchableOpacity onPress={ this.addNote.bind(this) } style={styles.addButton}>
                     <Text style={styles.addButtonText}>+</Text>
                 </TouchableOpacity>
+
             </KeyboardAvoidingView>
         );
     }
