@@ -7,22 +7,22 @@ export default class Note extends Component {
       isCompleted: false
     };
 
-    toggleComplete(){
-      toggleItem = () => {
-        this.setState(prevState => {
-          return{
-            isCompleted: !prevState.isCompleted
-          }
-        })
-      }
+    toggleItem = () => {
+      this.setState(prevState => {
+        return{
+          isCompleted: !prevState.isCompleted
+        }
+      })
     }
 
     render() {
+        const {isCompleted} = this.state;
         return (
             <KeyboardAvoidingView key={this.props.keyval} style={styles.note} behavior="padding" enabled>
+                <TouchableOpacity onPress={this.toggleItem}></TouchableOpacity>
                 <TouchableOpacity>
-                    <View style={styles.circle} />
-                    <Text style={[styles.noteText]}>{this.props.val.date}</Text>
+                    <View style={[styles.circle, isCompleted ? styles.completeCircle : styles.incompleteCircle]} />
+                    <Text style={[styles.noteTextDate]}>{this.props.val.date}</Text>
                     <Text style={[styles.noteText]}>{this.props.val.note}</Text>
                 </TouchableOpacity>
 
@@ -44,11 +44,15 @@ const styles = StyleSheet.create({
     },
     noteText: {
         paddingLeft: 30,
-        paddingBottom: 10,
+        paddingBottom: 20,
         paddingRight:30,
         // alignItems: 'center',
         // borderLeftWidth: 10,
         // borderLeftColor: '#E91E63'
+    },
+    noteTextDate: {
+        paddingLeft: 30,
+        paddingRight:30,
     },
     circle: {
         width: 20,
